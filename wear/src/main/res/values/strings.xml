@@ -21,16 +21,16 @@
     <string name="data_loaded">Data loaded.</string>
 
     <!-- Notifications -->
-    <string name="notification_bad_weather_title">It\'s going to rain</string>
-    <string name="notification_bad_weather_text">Your sunroof is open, do you want to close it?</string>
+    <string name="notification_bad_weather_title">It\'s gonna rain</string>
+    <string name="notification_bad_weather_text">Close sunroof?</string>
     <string name="notification_bad_weather_confirmation">Sunroof is closing</string>
     <string name="notification_bad_weather_confirmation_done">Sunroof was closed</string>
-    <string name="notification_unexpected_charge_stop_title">Charging was unexpected stopped</string>
-    <string name="notification_unexpected_charge_stop_text">Do you want start it?</string>
+    <string name="notification_unexpected_charge_stop_title">Charging was stopped</string>
+    <string name="notification_unexpected_charge_stop_text">Start it?</string>
     <string name="notification_unexpected_charge_stop_confirmation">Charging is starting</string>
     <string name="notification_unexpected_charge_stop_confirmation_done">Charging was started</string>
-    <string name="notification_car_unlocked_title">Your car is still unlocked</string>
-    <string name="notification_car_unlocked_text">Do you want to lock it?</string>
+    <string name="notification_car_unlocked_title">Your car is unlocked</string>
+    <string name="notification_car_unlocked_text">Lock it?</string>
     <string name="notification_car_unlocked_confirmation">Car is locking</string>
     <string name="notification_car_unlocked_confirmation_done">Car was locked</string>
 </resources>
