@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="button_color">#ff2979fe</color>
+    <color name="button_text_color">#fffdfdfe</color>
+    <color name="bg_color">#ff0a0513</color>
+
+    <color name="gradient_red">#ffff2c30</color>
+    <color name="gradient_green">#ff4fff60</color>
+    <color name="gradient_blue">#ff59fdff</color>
+
+    <color name="category_drive">#ffef5350</color>
+    <color name="category_condition">#ff42a5f5</color>
+    <color name="category_charge">#ff66bb6a</color>
+    <color name="category_location">#ffab47bc</color>
+
+    <color name="notification_red">#ffbc3538</color>
+</resources>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#50000000"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ripple" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="-20dp">
+
+        <android.support.wearable.view.CircledImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:circle_border_width="0dp"
+            app:circle_color="@color/button_color"
+            app:circle_radius="52dp" />
+        <ImageView
+            android:id="@+id/action_image_1"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/action_image_2"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/action_button_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="-20dp"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="@color/button_text_color"
+        android:textSize="35sp" />
+
+    <TextView
+        android:id="@+id/action_label_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="110dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:gravity="center"
+        android:textColor="@color/button_text_color"
+        android:textSize="20sp"
+        tools:text="Cancel" />
+
+    <TextView
+        android:id="@+id/action_label_2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="110dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:gravity="center"
+        android:textColor="@color/button_text_color"
+        android:textSize="20sp"
+        tools:text="Cancel" />
+
+</FrameLayout>

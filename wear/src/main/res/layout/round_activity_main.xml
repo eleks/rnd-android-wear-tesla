@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    tools:context=".MainActivity"
+    tools:deviceIds="wear_round">
+
+    <RelativeLayout
+        android:id="@+id/buttonsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ripple_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:alpha="0.1"
+            android:visibility="invisible" />
+        <FrameLayout
+            android:id="@+id/segment_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible">
+
+            <android.support.wearable.view.CircledImageView
+                android:id="@+id/top_image_background"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:circle_border_width="0dp"
+                app:circle_radius="@dimen/button_size"/>
+
+            <ImageView
+                android:id="@+id/top_image_1"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_gravity="center"/>
+
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/ripple_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:alpha="0.1"
+            android:visibility="invisible"/>
+        <FrameLayout
+            android:id="@+id/segment_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:visibility="invisible">
+
+            <android.support.wearable.view.CircledImageView
+                android:id="@+id/left_image_background"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:circle_border_width="0dp"
+                app:circle_radius="@dimen/button_size"/>
+
+            <ImageView
+                android:id="@+id/left_image_1"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_gravity="center"/>
+
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/center_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:id="@+id/ripple_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:alpha="0.1"
+            android:visibility="invisible"/>
+        <FrameLayout
+            android:id="@+id/segment_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:visibility="invisible">
+
+            <android.support.wearable.view.CircledImageView
+                android:id="@+id/right_image_background"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:circle_border_width="0dp"
+                app:circle_radius="@dimen/button_size"/>
+
+            <ImageView
+                android:id="@+id/right_image_1"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_gravity="center"/>
+
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/ripple_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:alpha="0.1"
+            android:visibility="invisible" />
+        <FrameLayout
+            android:id="@+id/segment_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible">
+
+            <android.support.wearable.view.CircledImageView
+                android:id="@+id/bottom_image_background"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:circle_border_width="0dp"
+                app:circle_radius="@dimen/button_size"/>
+
+            <ImageView
+                android:id="@+id/bottom_image_1"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_gravity="center"/>
+
+        </FrameLayout>
+    </RelativeLayout>
+
+</FrameLayout>

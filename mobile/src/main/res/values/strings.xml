@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Tesla</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="btn_bad_weather">Send bad weather notification</string>
+    <string name="btn_unexpected_charge_stop">Send unexpected charge stop notification</string>
+    <string name="btn_car_unlocked">Send car unlocked notification</string>
+</resources>
