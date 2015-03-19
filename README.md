@@ -7,7 +7,7 @@ Read detailed article here <http://elekslabs.com/2015/03/apple-watch-vs-android-
 
 See live demo here <https://www.youtube.com/watch?v=XK0YkxTFvV0> 
 
-p.s. the communication with Tesla Mock API is currently down becauase of unexpected changes in API.
+p.s. the communication with Tesla Mock API is currently down because of unexpected changes in API.
 
 *Disclaimer: Tesla Motors Inc. was not involved and did not endorse neither author, nor ELEKS Ltd. in experiments and application described in this article*
 
