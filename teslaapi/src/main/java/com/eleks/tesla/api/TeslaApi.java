@@ -1,6 +1,5 @@
 package com.eleks.tesla.api;
 
-import android.content.Context;
 import android.os.Build;
 
 import com.eleks.tesla.api.auth.AuthCredentials;
@@ -20,22 +19,37 @@ import java.util.Map;
  * Created by bogdan.melnychuk on 18.05.2015.
  */
 public class TeslaApi {
-    private static String OAUTH_CLIENT_ID = BuildConfig.OAUTH_CLIENT_ID;
-    private static String OAUTH_CLIENT_SECRET = BuildConfig.OAUTH_CLIENT_SECRET;
-    private static String HOST = BuildConfig.TESLA_HOST;
+    private static TeslaApi instance;
 
-    private ApiSpec jsonHashApiSpec;
-    private ApiEngine apiEngine;
+    private static final String OAUTH_CLIENT_ID = BuildConfig.OAUTH_CLIENT_ID;
+    private static final String OAUTH_CLIENT_SECRET = BuildConfig.OAUTH_CLIENT_SECRET;
+    private static final String HOST = BuildConfig.TESLA_HOST;
 
-    public TeslaApi(KeyStore keystore, File file, boolean debug, String userAgent) {
-        apiEngine = new ApiEngine(keystore, file, 15000, 60000, userAgent);
+    private final ApiSpec jsonHashApiSpec;
+    private final ApiEngine apiEngine;
+
+    private TeslaApi(KeyStore keystore, File file) {
+        apiEngine = new ApiEngine(keystore, file, 15000, 60000, getUserAgentString());
         jsonHashApiSpec = new ApiSpec("https", HOST, -1, -1, "", new JsonObjectEntityDecoder(), new OAuthModule());
+    }
+
+    public static void init(File file) {
+        if (instance == null) {
+            instance = new TeslaApi(null, file);
+        }
+    }
+
+    public static TeslaApi getInstance() {
+        if(instance == null) {
+            throw  new RuntimeException("TeslaApi instance should be initialized. use init() method");
+        }
+        return instance;
     }
 
     //TODO JSONObject should be reworked to some king of AuthResult entity
     public JSONObject login(final String userName, final String password) throws TeslaApiException {
         apiEngine.getCookieStore().clear();
-        JSONObject jsonObject = new JSONObject();
+        final JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("grant_type", "password");
             jsonObject.put("client_id", OAUTH_CLIENT_ID);
@@ -84,7 +98,7 @@ public class TeslaApi {
 
     public JSONObject setChargeLimit(long vehicleId, float chargeLimit, AuthCredentials authcredentials) throws TeslaApiException {
         try {
-            JSONObject jsonobject = new JSONObject();
+            final JSONObject jsonobject = new JSONObject();
             jsonobject.put("percent", chargeLimit);
             return sendVehicleCommand(vehicleId, "set_charge_limit", jsonobject, authcredentials);
         } catch (JSONException e) {
@@ -94,7 +108,7 @@ public class TeslaApi {
 
     public JSONObject setTemps(long vehicleId, float driverTemp, float passangerTemp, AuthCredentials authcredentials) throws TeslaApiException {
         try {
-            JSONObject jsonobject = new JSONObject();
+            final JSONObject jsonobject = new JSONObject();
             jsonobject.put("driver_temp", String.valueOf(driverTemp));
             jsonobject.put("passenger_temp", String.valueOf(passangerTemp));
             return sendVehicleCommand(vehicleId, "set_temps", jsonobject, authcredentials);
@@ -128,13 +142,13 @@ public class TeslaApi {
     }
 
     private JSONObject sendVehicleCommand(long vehicleId, String command, JSONObject jsonObject, AuthCredentials authcredentials) throws TeslaApiException {
-        command = String.format(Locale.US, "api/1/vehicles/%d/command/%s", vehicleId, command);
-        return apiEngine.dispatchJSONPostRequest(jsonHashApiSpec, command, jsonObject, authcredentials);
+        final String request = String.format(Locale.US, "api/1/vehicles/%d/command/%s", vehicleId, command);
+        return apiEngine.dispatchJSONPostRequest(jsonHashApiSpec, request, jsonObject, authcredentials);
     }
 
     private JSONObject sendVehicleDataRequest(long vehicleId, String command, Map<String, String> hashMap, AuthCredentials authcredentials) throws TeslaApiException {
-        command = String.format(Locale.US, "api/1/vehicles/%d/data_request/%s", vehicleId, command);
-        return apiEngine.dispatchGetRequest(jsonHashApiSpec, command, hashMap, authcredentials);
+        final String request = String.format(Locale.US, "api/1/vehicles/%d/data_request/%s", vehicleId, command);
+        return apiEngine.dispatchGetRequest(jsonHashApiSpec, request, hashMap, authcredentials);
     }
 
     // version chage to match read TeslaApp version
@@ -142,7 +156,7 @@ public class TeslaApi {
         //String packageName = "com.teslamotors.tesla";
         //String versionCode = "21";
         //Default value "Unknown";
-        String versionName = "5.0.1-1624448";
+        final String versionName = "5.0.1-1624448";
         return String.format("Model S %s (%s; Android %s %s; %s)", versionName, Build.MODEL, versionName, android.os.Build.VERSION.RELEASE, Locale.getDefault());
     }
 }

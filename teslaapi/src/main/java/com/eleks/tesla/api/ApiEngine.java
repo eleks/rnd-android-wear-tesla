@@ -41,11 +41,11 @@ import ch.boye.httpclientandroidlib.util.EntityUtils;
 class ApiEngine {
     private CookieStore cookieStore;
     private File dataDir;
-    private HttpClient httpClient;
+    private final HttpClient httpClient;
 
     public ApiEngine(KeyStore keystore, File file, int k, int l, String userAgent) {
-        HttpClientBuilder httpclientbuilder = HttpClients.custom();
-        RequestConfig.Builder requestConfigBuilder = RequestConfig.custom();
+        final HttpClientBuilder httpclientbuilder = HttpClients.custom();
+        final RequestConfig.Builder requestConfigBuilder = RequestConfig.custom();
         requestConfigBuilder.setConnectionRequestTimeout(k);
         requestConfigBuilder.setSocketTimeout(l);
         requestConfigBuilder.setCookieSpec("best-match");
@@ -91,10 +91,10 @@ class ApiEngine {
 
     public JSONObject dispatchJSONPostRequest(ApiSpec apiSpec, String requestPath, JSONObject jsonObject, AuthCredentials authCredentials) throws TeslaApiException {
         try {
-            URI uri = new URI(apiSpec.scheme, null, apiSpec.host, apiSpec.port, apiSpec.getPathForRequestPath(requestPath), null, null);
+            final URI uri = new URI(apiSpec.scheme, null, apiSpec.host, apiSpec.port, apiSpec.getPathForRequestPath(requestPath), null, null);
             Log.d(Config.TAG, "Executing request: " + uri.toURL() + ". With params: " + jsonObject.toString());
 
-            HttpPost httpPost = new HttpPost(uri);
+            final HttpPost httpPost = new HttpPost(uri);
             if (authCredentials != null) {
                 apiSpec.authModule.authorizeRequest(httpPost, authCredentials);
             }
@@ -111,7 +111,7 @@ class ApiEngine {
         try {
             String params = null;
             if (paramsMap != null) {
-                StringBuilder builder = new StringBuilder();
+                final StringBuilder builder = new StringBuilder();
                 for (Map.Entry<String, String> e : paramsMap.entrySet()) {
                     builder.append(String.format("%s=%s", e.getKey(), e.getValue()));
                     builder.append("&");
@@ -120,10 +120,10 @@ class ApiEngine {
                 params = builder.toString();
             }
 
-            URI uri = new URI(apiSpec.scheme, null, apiSpec.host, apiSpec.port, apiSpec.getPathForRequestPath(requestPath), params, null);
+            final URI uri = new URI(apiSpec.scheme, null, apiSpec.host, apiSpec.port, apiSpec.getPathForRequestPath(requestPath), params, null);
             Log.d(Config.TAG, "Executing request: " + uri.toURL());
 
-            HttpUriRequest get = new HttpGet(uri);
+            final HttpUriRequest get = new HttpGet(uri);
             apiSpec.authModule.authorizeRequest(get, authcredentials);
             return executeRequest(get);
         } catch (IOException | URISyntaxException e) {
@@ -135,13 +135,13 @@ class ApiEngine {
 
     private JSONObject executeRequest(HttpUriRequest request) throws TeslaApiException {
         try {
-            HttpResponse httpResponse = httpClient.execute(request);
+            final HttpResponse httpResponse = httpClient.execute(request);
             Log.d(Config.TAG, "Status: " + httpResponse.getStatusLine());
 
-            int status = httpResponse.getStatusLine().getStatusCode();
+            final int status = httpResponse.getStatusLine().getStatusCode();
             if (HttpStatus.isSuccessful(status)) {
-                HttpEntity entity = httpResponse.getEntity();
-                String responseString = EntityUtils.toString(entity, "UTF-8");
+                final HttpEntity entity = httpResponse.getEntity();
+                final String responseString = EntityUtils.toString(entity, "UTF-8");
                 Log.d(Config.TAG, "Response: " + responseString);
                 return new JSONObject(responseString);
             } else {

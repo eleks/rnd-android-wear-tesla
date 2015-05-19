@@ -1,0 +1,7 @@
+<resources>
+    <color name="black_semi_transparent">#B2000000</color>
+
+    <color name="materialPrimary">#F44336</color>
+    <color name="materialPrimaryDark">#D32F2F</color>
+    <color name="materialAccent">#B71C1C</color>
+</resources>

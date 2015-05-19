@@ -1,0 +1,127 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/materialPrimaryDark"
+    android:padding="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal">
+
+
+        <ImageView
+            android:id="@+id/imageLogo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/logo" />
+
+        <View
+            android:id="@+id/placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_below="@+id/imageLogo" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/placeholder">
+
+            <RelativeLayout
+                android:id="@+id/signInForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="30dp">
+
+                <EditText
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:hint="User Name"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textColorHighlight="@android:color/secondary_text_dark"
+                    android:textColorHint="@android:color/secondary_text_dark" />
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/username"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textColorHighlight="@android:color/secondary_text_dark"
+                    android:textColorHint="@android:color/secondary_text_dark" />
+
+
+                <Button
+                    android:id="@+id/signIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/password"
+                    android:text="Sign In"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/signOutForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="30dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/loginStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center"
+                    android:text="Logged In"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <Button
+                    android:id="@+id/signOut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/loginStatus"
+                    android:text="Sign Out"
+                    android:textColor="@android:color/white" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/progressContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:paddingTop="40dp"
+                android:visibility="invisible">
+
+                <!--<fr.castorflex.android.circularprogressbar.CircularProgressBar xmlns:android="http://schemas.android.com/apk/res/android"-->
+                <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:indeterminate="true"-->
+                <!--app:cpb_color="@android:color/white"-->
+                <!--app:cpb_max_sweep_angle="300"-->
+                <!--app:cpb_min_sweep_angle="10"-->
+                <!--app:cpb_rotation_speed="1.0"-->
+                <!--app:cpb_stroke_width="1dp"-->
+                <!--app:cpb_sweep_speed="1.0" />-->
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

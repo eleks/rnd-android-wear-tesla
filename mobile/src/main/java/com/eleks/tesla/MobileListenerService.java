@@ -8,12 +8,12 @@ import android.widget.Toast;
 import com.eleks.tesla.api.ApiAdapter;
 import com.eleks.tesla.teslalib.commands.SetChargeLimitCommand;
 import com.eleks.tesla.teslalib.commands.SetTempCommand;
+import com.eleks.tesla.teslalib.models.ChargeState;
 import com.eleks.tesla.teslalib.models.ClimateState;
 import com.eleks.tesla.teslalib.models.DriveState;
 import com.eleks.tesla.teslalib.models.Result;
-import com.eleks.tesla.teslalib.utils.SerializationUtil;
-import com.eleks.tesla.teslalib.models.ChargeState;
 import com.eleks.tesla.teslalib.models.VehicleState;
+import com.eleks.tesla.teslalib.utils.SerializationUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.Wearable;
@@ -34,7 +34,27 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-import static com.eleks.tesla.teslalib.ApiPathConstants.*;
+import static com.eleks.tesla.teslalib.ApiPathConstants.MOBILE_UPDATE_CHARGE_STATE;
+import static com.eleks.tesla.teslalib.ApiPathConstants.MOBILE_UPDATE_CLIMATE_STATE;
+import static com.eleks.tesla.teslalib.ApiPathConstants.MOBILE_UPDATE_DRIVE_STATE;
+import static com.eleks.tesla.teslalib.ApiPathConstants.MOBILE_UPDATE_LOCATION_MAP;
+import static com.eleks.tesla.teslalib.ApiPathConstants.MOBILE_UPDATE_VEHICLE_STATE;
+import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_ACTION_AUTO_CONDITIONING_START;
+import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_ACTION_AUTO_CONDITIONING_STOP;
+import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_ACTION_CHARGING_START;
+import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_ACTION_CHARGING_STOP;
+import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_ACTION_DOOR_LOCK;
+import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_ACTION_DOOR_UNLOCK;
+import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_ACTION_FLASHLIGHTS;
+import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_ACTION_HORN;
+import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_GET_CAR_CONFIG;
+import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_GET_CHARGE_STATE;
+import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_GET_CLIMATE_STATE;
+import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_GET_DRIVE_STATE;
+import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_GET_LOCATION_MAP;
+import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_GET_VEHICLE_STATE;
+import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_SET_MAX_CHARGING;
+import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_SET_TEMPS;
 
 /**
  * Created by Ihor.Demedyuk on 11.02.2015.
@@ -65,53 +85,54 @@ public class MobileListenerService extends WearableListenerService {
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
         mNodeId = messageEvent.getSourceNodeId();
-            Log.v(LOG_TAG, "Node ID of watch: " + mNodeId);
 
-            if (messageEvent.getPath().equals(WEAR_GET_CAR_CONFIG)) {
-                getVehicleState();
-                getChargeState();
-            } else if (messageEvent.getPath().equals(WEAR_GET_CHARGE_STATE)) {
-                getChargeState();
-            } else if (messageEvent.getPath().equals(WEAR_GET_CLIMATE_STATE)) {
-                getClimateState();
-            } else if (messageEvent.getPath().equals(WEAR_GET_DRIVE_STATE)) {
-                getDriveState();
-            } else if (messageEvent.getPath().equals(WEAR_GET_VEHICLE_STATE)) {
-                getVehicleState();
-            } else if (messageEvent.getPath().equals(WEAR_GET_LOCATION_MAP)){
-                getLocationMap();
-            } else if (messageEvent.getPath().equals(WEAR_ACTION_HORN)) {
-                performActionHorn();
-            } else if (messageEvent.getPath().equals(WEAR_ACTION_DOOR_LOCK)) {
-                performActionDoorLock();
-            } else if (messageEvent.getPath().equals(WEAR_ACTION_DOOR_UNLOCK)) {
-                performActionDoorUnlook();
-            } else if (messageEvent.getPath().equals(WEAR_ACTION_FLASHLIGHTS)) {
-                performActionFlashlights();
-            } else if (messageEvent.getPath().equals(WEAR_ACTION_CHARGING_START)) {
-                performActionChargingStart();
-            } else if (messageEvent.getPath().equals(WEAR_ACTION_CHARGING_STOP)) {
-                performActionChargingStop();
-            } else if (messageEvent.getPath().equals(WEAR_ACTION_AUTO_CONDITIONING_START)) {
-                performActionAutoConditionStart();
-            } else if (messageEvent.getPath().equals(WEAR_ACTION_AUTO_CONDITIONING_STOP)) {
-                performActionAutoConditionStop();
-            } else if (messageEvent.getPath().equals(WEAR_SET_TEMPS)) {
-                if (messageEvent.getData().length > 0) {
-                    SetTempCommand command = (SetTempCommand) getDeserializedCarState(messageEvent.getData());
-                    performSetTemps(command);
-                }
-            } else if (messageEvent.getPath().equals(WEAR_SET_MAX_CHARGING)) {
-                if (messageEvent.getData().length > 0) {
-                    SetChargeLimitCommand command = (SetChargeLimitCommand) getDeserializedCarState(messageEvent.getData());
-                    performSetMaxCharging(command);
-                }
-            } else if(messageEvent.getPath().equals(WEAR_SET_MAX_CHARGING)) {
-                performCloseSunRoof();
+        String message = messageEvent.getPath();
+        Log.v(LOG_TAG, "Node ID of watch: " + mNodeId);
+        if (messageEvent.getPath().equals(WEAR_GET_CAR_CONFIG)) {
+            getVehicleState();
+            getChargeState();
+        } else if (messageEvent.getPath().equals(WEAR_GET_CHARGE_STATE)) {
+            getChargeState();
+        } else if (messageEvent.getPath().equals(WEAR_GET_CLIMATE_STATE)) {
+            getClimateState();
+        } else if (messageEvent.getPath().equals(WEAR_GET_DRIVE_STATE)) {
+            getDriveState();
+        } else if (messageEvent.getPath().equals(WEAR_GET_VEHICLE_STATE)) {
+            getVehicleState();
+        } else if (messageEvent.getPath().equals(WEAR_GET_LOCATION_MAP)) {
+            getLocationMap();
+        } else if (messageEvent.getPath().equals(WEAR_ACTION_HORN)) {
+            performActionHorn();
+        } else if (messageEvent.getPath().equals(WEAR_ACTION_DOOR_LOCK)) {
+            performActionDoorLock();
+        } else if (messageEvent.getPath().equals(WEAR_ACTION_DOOR_UNLOCK)) {
+            performActionDoorUnlook();
+        } else if (messageEvent.getPath().equals(WEAR_ACTION_FLASHLIGHTS)) {
+            performActionFlashlights();
+        } else if (messageEvent.getPath().equals(WEAR_ACTION_CHARGING_START)) {
+            performActionChargingStart();
+        } else if (messageEvent.getPath().equals(WEAR_ACTION_CHARGING_STOP)) {
+            performActionChargingStop();
+        } else if (messageEvent.getPath().equals(WEAR_ACTION_AUTO_CONDITIONING_START)) {
+            performActionAutoConditionStart();
+        } else if (messageEvent.getPath().equals(WEAR_ACTION_AUTO_CONDITIONING_STOP)) {
+            performActionAutoConditionStop();
+        } else if (messageEvent.getPath().equals(WEAR_SET_TEMPS)) {
+            if (messageEvent.getData().length > 0) {
+                SetTempCommand command = (SetTempCommand) getDeserializedCarState(messageEvent.getData());
+                performSetTemps(command);
             }
+        } else if (messageEvent.getPath().equals(WEAR_SET_MAX_CHARGING)) {
+            if (messageEvent.getData().length > 0) {
+                SetChargeLimitCommand command = (SetChargeLimitCommand) getDeserializedCarState(messageEvent.getData());
+                performSetMaxCharging(command);
+            }
+        } else if (messageEvent.getPath().equals(WEAR_SET_MAX_CHARGING)) {
+            performCloseSunRoof();
         }
+    }
 
-    private void performCloseSunRoof(){
+    private void performCloseSunRoof() {
         mApiService.commandSunRoofControl(CAR_ID, "close", new Callback<Result>() {
             @Override
             public void success(Result result, Response response) {
@@ -340,7 +361,7 @@ public class MobileListenerService extends WearableListenerService {
         });
     }
 
-    private void getLocationMap(){
+    private void getLocationMap() {
         mApiService.getDriveState(CAR_ID, new Callback<DriveState>() {
             @Override
             public void success(final DriveState driveState, Response response) {
