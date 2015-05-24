@@ -30,12 +30,12 @@ public class PreferencesManager {
         getPreferences(context).edit().putString(USER_NAME, value).commit();
     }
 
-    public static String getCarId(Context context) {
-        return getPreferences(context).getString(CAR_ID, null);
+    public static long getCarId(Context context) {
+        return getPreferences(context).getLong(CAR_ID, 0);
     }
 
-    public static void putCarId(Context context, String value) {
-        getPreferences(context).edit().putString(CAR_ID, value).commit();
+    public static void putCarId(Context context, long value) {
+        getPreferences(context).edit().putLong(CAR_ID, value).commit();
     }
 
     public static void clear(Context context) {

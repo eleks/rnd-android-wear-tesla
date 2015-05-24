@@ -92,14 +92,19 @@ class ApiEngine {
     public JSONObject dispatchJSONPostRequest(ApiSpec apiSpec, String requestPath, JSONObject jsonObject, AuthCredentials authCredentials) throws TeslaApiException {
         try {
             final URI uri = new URI(apiSpec.scheme, null, apiSpec.host, apiSpec.port, apiSpec.getPathForRequestPath(requestPath), null, null);
-            Log.d(Config.TAG, "Executing request: " + uri.toURL() + ". With params: " + jsonObject.toString());
+            Log.d(Config.TAG, "Executing request: " + uri.toURL());
+            if(jsonObject != null){
+                Log.d(Config.TAG, "Params: " + jsonObject.toString());
+            }
 
             final HttpPost httpPost = new HttpPost(uri);
             if (authCredentials != null) {
                 apiSpec.authModule.authorizeRequest(httpPost, authCredentials);
             }
             httpPost.setHeader("Content-Type", "application/json; charset=utf-8");
-            httpPost.setEntity(new StringEntity(jsonObject.toString(), "UTF-8"));
+            if (jsonObject != null){
+                httpPost.setEntity(new StringEntity(jsonObject.toString(), "UTF-8"));
+            }
 
             return executeRequest(httpPost);
         } catch (UnsupportedEncodingException | URISyntaxException | MalformedURLException e) {

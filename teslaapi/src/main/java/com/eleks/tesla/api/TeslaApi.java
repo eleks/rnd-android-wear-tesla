@@ -40,8 +40,8 @@ public class TeslaApi {
     }
 
     public static TeslaApi getInstance() {
-        if(instance == null) {
-            throw  new RuntimeException("TeslaApi instance should be initialized. use init() method");
+        if (instance == null) {
+            throw new RuntimeException("TeslaApi instance should be initialized. use init() method");
         }
         return instance;
     }
@@ -63,8 +63,8 @@ public class TeslaApi {
     }
 
     //TODO JSONObject should be reworked to some king of AuthResult entity
-    public void getVehicles(AuthCredentials authcredentials) throws TeslaApiException {
-        apiEngine.dispatchGetRequest(jsonHashApiSpec, "api/1/vehicles", null, authcredentials);
+    public JSONObject getVehicles(AuthCredentials authcredentials) throws TeslaApiException {
+        return apiEngine.dispatchGetRequest(jsonHashApiSpec, "api/1/vehicles", null, authcredentials);
     }
 
     public JSONObject getVehicleState(long vehicleId, AuthCredentials authcredentials) throws TeslaApiException {
@@ -82,6 +82,30 @@ public class TeslaApi {
 
     public JSONObject lockVehicle(long vehicleId, AuthCredentials authcredentials) throws TeslaApiException {
         return sendVehicleCommand(vehicleId, "door_lock", null, authcredentials);
+    }
+
+    public JSONObject closeSunroof(long vehicleId, AuthCredentials authcredentials) throws TeslaApiException {
+        try {
+            JSONObject jsonobject = new JSONObject();
+            jsonobject.put("state", "close");
+            return sendVehicleCommand(vehicleId, "sun_roof_control", jsonobject, authcredentials);
+        } catch (JSONException e) {
+            throw new TeslaApiException(e);
+        }
+    }
+
+    public JSONObject openSunroof(long vehicleId, AuthCredentials authcredentials) throws TeslaApiException {
+        try {
+            JSONObject jsonobject = new JSONObject();
+            jsonobject.put("state", "open");
+            return sendVehicleCommand(vehicleId, "sun_roof_control", jsonobject, authcredentials);
+        } catch (JSONException e) {
+            throw new TeslaApiException(e);
+        }
+    }
+
+    public JSONObject getDriveState(long vehicleId, AuthCredentials authcredentials) throws TeslaApiException {
+        return sendVehicleDataRequest(vehicleId, "drive_state", null, authcredentials);
     }
 
     public JSONObject getClimateState(long vehicleId, AuthCredentials authcredentials) throws TeslaApiException {

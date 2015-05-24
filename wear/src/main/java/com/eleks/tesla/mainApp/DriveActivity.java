@@ -12,6 +12,7 @@ import com.eleks.tesla.events.ToHandHoldRequestEvent;
 import de.greenrobot.event.EventBus;
 
 import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_ACTION_DOOR_LOCK;
+import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_ACTION_DOOR_UNLOCK;
 import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_ACTION_FLASHLIGHTS;
 import static com.eleks.tesla.teslalib.ApiPathConstants.WEAR_ACTION_HORN;
 
@@ -72,7 +73,7 @@ public class DriveActivity extends MainActivity implements View.OnClickListener 
                 AnimationUtils.performActionAnimation(mImages[1], mImageSideSize);
                 break;
             case R.id.segment_left:
-                EventBus.getDefault().post(new ToHandHoldRequestEvent(WEAR_ACTION_DOOR_LOCK));
+                EventBus.getDefault().post(new ToHandHoldRequestEvent(mIsLocked ? WEAR_ACTION_DOOR_UNLOCK : WEAR_ACTION_DOOR_LOCK));
                 AnimationUtils.performToggleAnimation(mImages[2], mImageSideSize,
                         mIsLocked ? R.mipmap.action_unlock : R.mipmap.action_lock);
                 mIsLocked = !mIsLocked;

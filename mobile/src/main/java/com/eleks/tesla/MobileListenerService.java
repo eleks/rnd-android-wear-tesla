@@ -6,6 +6,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.eleks.tesla.api.ApiAdapter;
+import com.eleks.tesla.api.Config;
+import com.eleks.tesla.api.TeslaApi;
+import com.eleks.tesla.api.auth.AuthCredentials;
+import com.eleks.tesla.api.exception.TeslaApiException;
 import com.eleks.tesla.teslalib.commands.SetChargeLimitCommand;
 import com.eleks.tesla.teslalib.commands.SetTempCommand;
 import com.eleks.tesla.teslalib.models.ChargeState;
@@ -14,6 +18,7 @@ import com.eleks.tesla.teslalib.models.DriveState;
 import com.eleks.tesla.teslalib.models.Result;
 import com.eleks.tesla.teslalib.models.VehicleState;
 import com.eleks.tesla.teslalib.utils.SerializationUtil;
+import com.eleks.tesla.utils.PreferencesManager;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.Wearable;
@@ -63,6 +68,7 @@ public class MobileListenerService extends WearableListenerService {
     public final String TAG = MobileListenerService.class.getSimpleName();
 
     public static final String CAR_ID = "321";
+    private long carId;// = 6560460414667285209L;
     private final String LOG_TAG = MobileListenerService.class.getSimpleName();
 
     private static final long CONNECTION_TIME_OUT_MS = 1000;
@@ -70,6 +76,7 @@ public class MobileListenerService extends WearableListenerService {
     private GoogleApiClient mGoogleApiClient;
     private String mNodeId;
     private ApiAdapter mApiService;
+    private AuthCredentials credentials;
 
     @Override
     public void onCreate() {
@@ -84,10 +91,14 @@ public class MobileListenerService extends WearableListenerService {
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
+        String accessToken = PreferencesManager.getAccessToken(this);
+        carId = PreferencesManager.getCarId(this);
+        credentials = new AuthCredentials("ua.nazar@gmail.com", accessToken);
         mNodeId = messageEvent.getSourceNodeId();
 
         String message = messageEvent.getPath();
-        Log.v(LOG_TAG, "Node ID of watch: " + mNodeId);
+        Log.v(LOG_TAG, "Message" + message);
+        Log.i(LOG_TAG, "Node ID of watch: " + mNodeId);
         if (messageEvent.getPath().equals(WEAR_GET_CAR_CONFIG)) {
             getVehicleState();
             getChargeState();
@@ -133,20 +144,25 @@ public class MobileListenerService extends WearableListenerService {
     }
 
     private void performCloseSunRoof() {
-        mApiService.commandSunRoofControl(CAR_ID, "close", new Callback<Result>() {
-            @Override
-            public void success(Result result, Response response) {
-                if (result != null) {
-                    Log.v(TAG, "Sunroof closed - " + result.isResult() + " reason - " + result.getReason());
-                    Toast.makeText(MobileListenerService.this, "Sunroof closed...", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                logNetworkingError(error);
-            }
-        });
+        try {
+            TeslaApi.getInstance().closeSunroof(carId, credentials);
+        } catch (TeslaApiException e) {
+            Log.e(Config.TAG, e.getMessage());
+        }
+//        mApiService.commandSunRoofControl(CAR_ID, "close", new Callback<Result>() {
+//            @Override
+//            public void success(Result result, Response response) {
+//                if (result != null) {
+//                    Log.v(TAG, "Sunroof closed - " + result.isResult() + " reason - " + result.getReason());
+//                    Toast.makeText(MobileListenerService.this, "Sunroof closed...", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error) {
+//                logNetworkingError(error);
+//            }
+//        });
     }
 
     private void performActionChargingStart() {
@@ -252,71 +268,91 @@ public class MobileListenerService extends WearableListenerService {
     }
 
     private void performActionFlashlights() {
-        mApiService.commandFlashLights(CAR_ID, new Callback<Result>() {
-            @Override
-            public void success(Result result, Response response) {
-                if (result != null) {
-                    Log.v(TAG, "ActionFlashlights - " + result.isResult() + " reason - " + result.getReason());
-                    Toast.makeText(MobileListenerService.this, "Flash lighting...", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                logNetworkingError(error);
-            }
-        });
+        try {
+            TeslaApi.getInstance().flashLights(carId, credentials);
+        } catch (TeslaApiException e) {
+            Log.e(Config.TAG, e.getMessage());
+        }
+//        mApiService.commandFlashLights(CAR_ID, new Callback<Result>() {
+//            @Override
+//            public void success(Result result, Response response) {
+//                if (result != null) {
+//                    Log.v(TAG, "ActionFlashlights - " + result.isResult() + " reason - " + result.getReason());
+//                    Toast.makeText(MobileListenerService.this, "Flash lighting...", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error) {
+//                logNetworkingError(error);
+//            }
+//        });
     }
 
     private void performActionDoorUnlook() {
-        mApiService.commandDoorUnlock(CAR_ID, new Callback<Result>() {
-            @Override
-            public void success(Result result, Response response) {
-                if (result != null) {
-                    Log.v(TAG, "ActionDoorUnlook - " + result.isResult() + " reason - " + result.getReason());
-                    Toast.makeText(MobileListenerService.this, "Doors unlocked...", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                logNetworkingError(error);
-            }
-        });
+        try {
+            TeslaApi.getInstance().unlockVehicle(carId, credentials);
+        } catch (TeslaApiException e) {
+            Log.e(Config.TAG, e.getMessage());
+        }
+//        mApiService.commandDoorUnlock(CAR_ID, new Callback<Result>() {
+//            @Override
+//            public void success(Result result, Response response) {
+//                if (result != null) {
+//                    Log.v(TAG, "ActionDoorUnlook - " + result.isResult() + " reason - " + result.getReason());
+//                    Toast.makeText(MobileListenerService.this, "Doors unlocked...", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error) {
+//                logNetworkingError(error);
+//            }
+//        });
     }
 
     private void performActionDoorLock() {
-        mApiService.commandDoorLock(CAR_ID, new Callback<Result>() {
-            @Override
-            public void success(Result result, Response response) {
-                if (result != null) {
-                    Log.v(TAG, "ActionDoorLock - " + result.isResult() + " reason - " + result.getReason());
-                    Toast.makeText(MobileListenerService.this, "Doors locked...", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                logNetworkingError(error);
-            }
-        });
+        try {
+            TeslaApi.getInstance().lockVehicle(carId, credentials);
+        } catch (TeslaApiException e) {
+            Log.e(Config.TAG, e.getMessage());
+        }
+//        mApiService.commandDoorLock(CAR_ID, new Callback<Result>() {
+//            @Override
+//            public void success(Result result, Response response) {
+//                if (result != null) {
+//                    Log.v(TAG, "ActionDoorLock - " + result.isResult() + " reason - " + result.getReason());
+//                    Toast.makeText(MobileListenerService.this, "Doors locked...", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error) {
+//                logNetworkingError(error);
+//            }
+//        });
     }
 
     private void performActionHorn() {
-        mApiService.commandHonkHorn(CAR_ID, new Callback<Result>() {
-            @Override
-            public void success(Result result, Response response) {
-                if (result != null) {
-                    Log.v(TAG, "ActionHorn - " + result.isResult() + " reason - " + result.getReason());
-                    Toast.makeText(MobileListenerService.this, "Honking...", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                logNetworkingError(error);
-            }
-        });
+        try {
+            TeslaApi.getInstance().honkHorn(carId, credentials);
+        } catch (TeslaApiException e) {
+            Log.e(Config.TAG, e.getMessage());
+        }
+//        mApiService.commandHonkHorn(CAR_ID, new Callback<Result>() {
+//            @Override
+//            public void success(Result result, Response response) {
+//                if (result != null) {
+//                    Log.v(TAG, "ActionHorn - " + result.isResult() + " reason - " + result.getReason());
+//                    Toast.makeText(MobileListenerService.this, "Honking...", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error) {
+//                logNetworkingError(error);
+//            }
+//        });
     }
 
     private void getChargeState() {

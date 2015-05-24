@@ -5,12 +5,14 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:src="@drawable/map"
         android:id="@+id/map_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"/>
 
     <ImageView
+        android:visibility="gone"
         android:id="@+id/pin_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
