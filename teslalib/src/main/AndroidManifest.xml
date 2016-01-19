@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.eleks.tesla.teslalib">
+    package="com.eleks.tesla.teslalib">
 
-    <application android:allowBackup="true"
-                 android:label="@string/app_name"
-        >
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name">
 
     </application>
 

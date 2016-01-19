@@ -75,7 +75,7 @@ public interface ApiAdapter {
 
     @GET("/vehicles/{id}/command/flash_lights")
     void commandFlashLights(@Path("id") String carId,
-                           Callback<Result> callback);
+                            Callback<Result> callback);
 
     @GET("/vehicles/{id}/command/honk_horn")
     void commandHonkHorn(@Path("id") String carId,

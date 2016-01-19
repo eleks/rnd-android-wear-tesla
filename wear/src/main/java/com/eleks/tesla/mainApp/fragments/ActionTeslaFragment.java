@@ -136,9 +136,9 @@ public class ActionTeslaFragment extends BaseTeslaFragment implements View.OnCli
         }
     }
 
-    private void performSwitchAnimation(boolean inOrder){
+    private void performSwitchAnimation(boolean inOrder) {
         mNormalImageSize = mActionImage1.getHeight();
-        if(inOrder){
+        if (inOrder) {
             performSwitchAnimation(mActionImage1, mActionImage2, mActionLabel1, mActionLabel2);
         } else {
             performSwitchAnimation(mActionImage2, mActionImage1, mActionLabel2, mActionLabel1);
@@ -180,7 +180,7 @@ public class ActionTeslaFragment extends BaseTeslaFragment implements View.OnCli
         mainAnim.start();
     }
 
-    private void performActionAnimation(View view){
+    private void performActionAnimation(View view) {
         ValueAnimator startAnim = ValueAnimator.ofInt(mNormalImageSize, getSizeFromCoef(START_ANIMATION_OUT_SCALE_END));
         startAnim.addUpdateListener(new ScaleAnimateListener(view));
         startAnim.setDuration(START_ANIMATION_TIME);
@@ -308,7 +308,7 @@ public class ActionTeslaFragment extends BaseTeslaFragment implements View.OnCli
     }
 
     private void setHornViews() {
-//        mActionImage1.setImageResource(R.mipmap.action_horn);
+//        mActionImage1.setImageResource(R.drawable.action_horn);
         mActionLabel1.setText(getString(R.string.action_horn));
     }
 
@@ -323,14 +323,14 @@ public class ActionTeslaFragment extends BaseTeslaFragment implements View.OnCli
         } else {
             setSecondViewsActive();
         }
-//        mActionImage1.setImageResource(R.mipmap.action_car_lock);
+//        mActionImage1.setImageResource(R.drawable.action_car_lock);
         mActionLabel2.setText(getString(R.string.action_door_unlock));
-//        mActionImage2.setImageResource(R.mipmap.action_car_unlock);
+//        mActionImage2.setImageResource(R.drawable.action_car_unlock);
         mActionLabel1.setText(getString(R.string.action_door_lock));
     }
 
     private void setFlashlightViews() {
-        mActionImage1.setImageResource(R.mipmap.action_lights);
+        mActionImage1.setImageResource(R.drawable.action_lights);
         mActionLabel1.setText(getString(R.string.action_flash_lights));
     }
 
@@ -345,9 +345,9 @@ public class ActionTeslaFragment extends BaseTeslaFragment implements View.OnCli
         } else {
             setSecondViewsActive();
         }
-//        mActionImage2.setImageResource(R.mipmap.action_charge_stop);
+//        mActionImage2.setImageResource(R.drawable.action_charge_stop);
         mActionLabel2.setText(getString(R.string.action_charging_stop));
-//        mActionImage1.setImageResource(R.mipmap.action_charge_start);
+//        mActionImage1.setImageResource(R.drawable.action_charge_start);
         mActionLabel1.setText(getString(R.string.action_charging_start));
     }
 
@@ -376,9 +376,9 @@ public class ActionTeslaFragment extends BaseTeslaFragment implements View.OnCli
         } else {
             setFirstViewActive();
         }
-//        mActionImage1.setImageResource(R.mipmap.action_ac_start);
+//        mActionImage1.setImageResource(R.drawable.action_ac_start);
         mActionLabel1.setText(getString(R.string.action_auto_conditioning_start));
-//        mActionImage2.setImageResource(R.mipmap.action_ac_stop);
+//        mActionImage2.setImageResource(R.drawable.action_ac_stop);
         mActionLabel2.setText(getString(R.string.action_auto_conditioning_stop));
     }
 

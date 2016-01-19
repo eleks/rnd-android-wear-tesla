@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:hint="User Name"
-                    android:text="ua.nazar@gmail.com"
+                    android:text="tesla@example.com"
                     android:textColor="@android:color/white"
                     android:textColorHighlight="@android:color/secondary_text_dark"
                     android:textColorHint="@android:color/secondary_text_dark" />
@@ -55,7 +55,7 @@
                     android:layout_below="@+id/username"
                     android:hint="Password"
                     android:inputType="textPassword"
-                    android:text="MacBookAir13"
+                    android:text="abcd123456789"
                     android:textColor="@android:color/white"
                     android:textColorHighlight="@android:color/secondary_text_dark"
                     android:textColorHint="@android:color/secondary_text_dark" />

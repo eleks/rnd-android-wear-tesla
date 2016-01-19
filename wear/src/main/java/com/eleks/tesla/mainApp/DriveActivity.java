@@ -44,21 +44,21 @@ public class DriveActivity extends MainActivity implements View.OnClickListener 
     protected void setUpUI() {
         mCircles[0].setCircleColor(getResources().getColor(R.color.category_drive));
         mRipples[0].setImageResource(R.drawable.fake_ripple_drive);
-        mImages[0].setImageResource(R.mipmap.action_honk);
+        mImages[0].setImageResource(R.drawable.action_honk);
 
         mCircles[1].setCircleColor(getResources().getColor(R.color.category_drive));
         mRipples[1].setImageResource(R.drawable.fake_ripple_drive);
-        mImages[1].setImageResource(R.mipmap.action_lights);
+        mImages[1].setImageResource(R.drawable.action_lights);
 
         mCircles[2].setCircleColor(getResources().getColor(R.color.category_drive));
         mRipples[2].setImageResource(R.drawable.fake_ripple_drive);
-        mImages[2].setImageResource(R.mipmap.action_lock);
+        mImages[2].setImageResource(R.drawable.action_lock);
 
         mCenterImage = (ImageView) findViewById(R.id.center_image);
-        mCenterImage.setImageResource(R.mipmap.drive_logo);
+        mCenterImage.setImageResource(R.drawable.drive_logo);
     }
 
-    private void setCenterImageSize(){
+    private void setCenterImageSize() {
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mCenterImage.getLayoutParams();
         lp.width = (int) (mImageSideSize * 0.8f);
         lp.height = (int) (mImageSideSize * 0.8f);
@@ -75,7 +75,7 @@ public class DriveActivity extends MainActivity implements View.OnClickListener 
             case R.id.segment_left:
                 EventBus.getDefault().post(new ToHandHoldRequestEvent(mIsLocked ? WEAR_ACTION_DOOR_UNLOCK : WEAR_ACTION_DOOR_LOCK));
                 AnimationUtils.performToggleAnimation(mImages[2], mImageSideSize,
-                        mIsLocked ? R.mipmap.action_unlock : R.mipmap.action_lock);
+                        mIsLocked ? R.drawable.action_unlock : R.drawable.action_lock);
                 mIsLocked = !mIsLocked;
                 break;
             case R.id.segment_right:

@@ -51,13 +51,13 @@ public class WearListenerService extends WearableListenerService {
                 postDriveStateFromMsg(messageEvent);
             } else if (MOBILE_UPDATE_VEHICLE_STATE.equals(messageEvent.getPath())) {
                 postVehicleStateFromMsg(messageEvent);
-            } else if (MOBILE_UPDATE_LOCATION_MAP.equals(messageEvent.getPath())){
+            } else if (MOBILE_UPDATE_LOCATION_MAP.equals(messageEvent.getPath())) {
                 postLocationMapFromMsg(messageEvent);
-            } else if (MOBILE_SHOW_NOTIFICATION_BAD_WEATHER.equals(messageEvent.getPath())){
+            } else if (MOBILE_SHOW_NOTIFICATION_BAD_WEATHER.equals(messageEvent.getPath())) {
                 showBabWeatherNotification();
-            } else if (MOBILE_SHOW_NOTIFICATION_UNEXPECTED_STOP_CHARGING.equals(messageEvent.getPath())){
+            } else if (MOBILE_SHOW_NOTIFICATION_UNEXPECTED_STOP_CHARGING.equals(messageEvent.getPath())) {
                 showUnexpectedStopChargingNotification();
-            } else if (MOBILE_SHOW_NOTIFICATION_CAR_UNLOCKED.equals(messageEvent.getPath())){
+            } else if (MOBILE_SHOW_NOTIFICATION_CAR_UNLOCKED.equals(messageEvent.getPath())) {
                 showCarUnlockedNotification();
             }
         } catch (IOException e) {
@@ -78,14 +78,14 @@ public class WearListenerService extends WearableListenerService {
         NotificationCompat.WearableExtender wearableExtender =
                 new NotificationCompat.WearableExtender()
                         .setHintHideIcon(true)
-                        .setBackground(BitmapFactory.decodeResource(getResources(), R.mipmap.notification_car_unlocked));
+                        .setBackground(BitmapFactory.decodeResource(getResources(), R.drawable.notification_car_unlocked));
 
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this)
                         .extend(wearableExtender)
-                        .setSmallIcon(R.mipmap.notification_small_car_unlock)
+                        .setSmallIcon(R.drawable.notification_small_car_unlock)
                         .setContentTitle(getString(R.string.notification_car_unlocked_title))
-                        .addAction(R.mipmap.notif_unlock, getString(R.string.notification_car_unlocked_text), viewPendingIntent);
+                        .addAction(R.drawable.notif_unlock, getString(R.string.notification_car_unlocked_text), viewPendingIntent);
 
         sendNotification(notificationId, notificationBuilder);
     }
@@ -101,14 +101,14 @@ public class WearListenerService extends WearableListenerService {
         NotificationCompat.WearableExtender wearableExtender =
                 new NotificationCompat.WearableExtender()
                         .setHintHideIcon(true)
-                        .setBackground(BitmapFactory.decodeResource(getResources(), R.mipmap.notification_charge_interraped));
+                        .setBackground(BitmapFactory.decodeResource(getResources(), R.drawable.notification_charge_interraped));
 
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this)
                         .extend(wearableExtender)
-                        .setSmallIcon(R.mipmap.notification_small_charge_stopped)
+                        .setSmallIcon(R.drawable.notification_small_charge_stopped)
                         .setContentTitle(getString(R.string.notification_unexpected_charge_stop_title))
-                        .addAction(R.mipmap.notif_charge, getString(R.string.notification_unexpected_charge_stop_text), viewPendingIntent);
+                        .addAction(R.drawable.notif_charge, getString(R.string.notification_unexpected_charge_stop_text), viewPendingIntent);
 
         sendNotification(notificationId, notificationBuilder);
     }
@@ -124,19 +124,19 @@ public class WearListenerService extends WearableListenerService {
         NotificationCompat.WearableExtender wearableExtender =
                 new NotificationCompat.WearableExtender()
                         .setHintHideIcon(true)
-                        .setBackground(BitmapFactory.decodeResource(getResources(), R.mipmap.notification_bad_weather));
+                        .setBackground(BitmapFactory.decodeResource(getResources(), R.drawable.notification_bad_weather));
 
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this)
                         .extend(wearableExtender)
-                        .setSmallIcon(R.mipmap.notification_small_car_unlock)
+                        .setSmallIcon(R.drawable.notification_small_car_unlock)
                         .setContentTitle(getString(R.string.notification_bad_weather_title))
-                        .addAction(R.mipmap.notif_unlock, getString(R.string.notification_bad_weather_text), viewPendingIntent);
+                        .addAction(R.drawable.notif_unlock, getString(R.string.notification_bad_weather_text), viewPendingIntent);
 
         sendNotification(notificationId, notificationBuilder);
     }
 
-    private void sendNotification(int notificationId, NotificationCompat.Builder notificationBuilder){
+    private void sendNotification(int notificationId, NotificationCompat.Builder notificationBuilder) {
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(notificationId, notificationBuilder.build());
     }

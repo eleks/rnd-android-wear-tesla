@@ -36,13 +36,13 @@ public class ConfirmationNotificationActivity extends Activity implements Delaye
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getIntent() != null){
+        if (getIntent() != null) {
             String action = getIntent().getAction();
-            if(ACTION_CLOSE_SUNROOF.equals(action)){
+            if (ACTION_CLOSE_SUNROOF.equals(action)) {
                 mActionMode = ACTION_MODE_CLOSE_SUNROOF;
-            } else if(ACTION_LOCK_DOOR.equals(action)){
+            } else if (ACTION_LOCK_DOOR.equals(action)) {
                 mActionMode = ACTION_MODE_LOCK_DOOR;
-            } else if(ACTION_START_CHARGING.equals(action)){
+            } else if (ACTION_START_CHARGING.equals(action)) {
                 mActionMode = ACTION_MODE_START_CHARGING;
             }
         }
@@ -56,7 +56,7 @@ public class ConfirmationNotificationActivity extends Activity implements Delaye
         mDelayedConfirmation.setListener(this);
         mDelayedConfirmation.setTotalTimeMs(3000);
         mDelayedConfirmation.start();
-        switch (mActionMode){
+        switch (mActionMode) {
             case ACTION_MODE_CLOSE_SUNROOF:
                 mConfirmationText.setText(R.string.notification_bad_weather_confirmation);
                 break;
@@ -73,7 +73,7 @@ public class ConfirmationNotificationActivity extends Activity implements Delaye
     public void onTimerFinished(View view) {
         Intent intent = new Intent(this, ConfirmationActivity.class);
         intent.putExtra(ConfirmationActivity.EXTRA_ANIMATION_TYPE, ConfirmationActivity.SUCCESS_ANIMATION);
-        switch (mActionMode){
+        switch (mActionMode) {
             case ACTION_MODE_CLOSE_SUNROOF:
                 EventBus.getDefault().post(new ToHandHoldRequestEvent(WEAR_CLOSE_SUNROOF));
                 intent.putExtra(ConfirmationActivity.EXTRA_MESSAGE, getString(R.string.notification_bad_weather_confirmation_done));

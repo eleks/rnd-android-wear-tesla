@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="-20dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center" />
 
     <TextView
         android:id="@+id/loading_status"
@@ -23,6 +23,6 @@
         android:text="@string/loading"
         android:fontFamily="sans-serif-condensed-light"
         android:textSize="20sp"
-        android:textColor="@color/button_text_color"/>
+        android:textColor="@color/button_text_color" />
 
 </FrameLayout>

@@ -9,7 +9,7 @@ import com.eleks.tesla.mainApp.MainActivity;
  */
 public class BaseTeslaFragment extends Fragment {
 
-    public MainActivity getOwnActivity(){
+    public MainActivity getOwnActivity() {
         return (MainActivity) getActivity();
     }
 }

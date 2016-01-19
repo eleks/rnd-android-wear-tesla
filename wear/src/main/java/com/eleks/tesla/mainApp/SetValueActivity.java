@@ -164,13 +164,13 @@ public class SetValueActivity extends CommunicationActivity implements RadialPic
         Object event;
         if (mType == SELECTOR_TYPE_CHARGING) {
             AnimationUtils.performToggleAnimation(mToggleImage, mImageSideSize,
-                    mIsToggleOn ? R.mipmap.charge_on : R.mipmap.charge_off);
+                    mIsToggleOn ? R.drawable.charge_on : R.drawable.charge_off);
             event = new ToHandHoldRequestEvent(mIsToggleOn ?
                     ApiPathConstants.WEAR_ACTION_CHARGING_START
                     : ApiPathConstants.WEAR_ACTION_CHARGING_STOP);
         } else {
             AnimationUtils.performToggleAnimation(mToggleImage, mImageSideSize,
-                    mIsToggleOn ? R.mipmap.hvac_on : R.mipmap.hvac_off);
+                    mIsToggleOn ? R.drawable.hvac_on : R.drawable.hvac_off);
             event = new ToHandHoldRequestEvent(mIsToggleOn ?
                     ApiPathConstants.WEAR_ACTION_AUTO_CONDITIONING_START
                     : ApiPathConstants.WEAR_ACTION_AUTO_CONDITIONING_STOP);
@@ -226,12 +226,12 @@ public class SetValueActivity extends CommunicationActivity implements RadialPic
 
         @Override
         public int getOnToggleImageResource() {
-            return R.mipmap.hvac_on;
+            return R.drawable.hvac_on;
         }
 
         @Override
         public int getOffToggleImageResource() {
-            return R.mipmap.hvac_off;
+            return R.drawable.hvac_off;
         }
 
         @Override
@@ -271,12 +271,12 @@ public class SetValueActivity extends CommunicationActivity implements RadialPic
 
         @Override
         public int getOnToggleImageResource() {
-            return R.mipmap.charge_on;
+            return R.drawable.charge_on;
         }
 
         @Override
         public int getOffToggleImageResource() {
-            return R.mipmap.charge_off;
+            return R.drawable.charge_off;
         }
 
         @Override

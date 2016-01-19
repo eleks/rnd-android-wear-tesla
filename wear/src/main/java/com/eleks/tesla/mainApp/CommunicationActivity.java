@@ -34,7 +34,7 @@ public class CommunicationActivity extends Activity {
     }
 
     public void bindCommunicationService() {
-        Intent i = new Intent(this , CommunicationService.class);
+        Intent i = new Intent(this, CommunicationService.class);
         this.bindService(i, mServerConn, BIND_AUTO_CREATE);
         this.startService(i);
     }

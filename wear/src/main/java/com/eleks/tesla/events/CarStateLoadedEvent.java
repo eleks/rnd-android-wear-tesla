@@ -9,7 +9,7 @@ import com.eleks.tesla.teslalib.models.CarState;
 public class CarStateLoadedEvent {
     private CarState mCarState;
 
-    public CarStateLoadedEvent(CarState carState){
+    public CarStateLoadedEvent(CarState carState) {
         mCarState = carState;
     }
 

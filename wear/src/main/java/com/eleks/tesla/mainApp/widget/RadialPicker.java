@@ -66,7 +66,7 @@ public class RadialPicker extends View {
         mRadialPaint = new Paint();
         mRadialPaint.setAntiAlias(true);
 
-        Drawable chargingDrawable = getContext().getResources().getDrawable(R.mipmap.sieve);
+        Drawable chargingDrawable = getContext().getResources().getDrawable(R.drawable.sieve);
         mSieveBitmap = ((BitmapDrawable) chargingDrawable).getBitmap();
 
     }

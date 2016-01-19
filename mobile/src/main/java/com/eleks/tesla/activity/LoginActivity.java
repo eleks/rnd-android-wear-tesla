@@ -49,18 +49,18 @@ public class LoginActivity extends BaseActivity {
     @InjectView(R.id.signOutForm)
     View signOutForm;
 
-    private AsyncTask loginTask = new AsyncTask<Object, Object, Object>() {
+    private class LoginTask extends AsyncTask<String, Object, Object> {
         @Override
-        protected Object doInBackground(Object... voids) {
+        protected Object doInBackground(String... creds) {
             try {
                 TeslaApi api = TeslaApi.getInstance();
                 Log.d(Config.TAG, "Performing login operation...");
-                JSONObject loginResult = api.login(tvUserName.getText().toString(), tvPassword.getText().toString());
+                JSONObject loginResult = api.login(creds[0], creds[1]);
                 String accessToken = loginResult.getString("access_token");
                 Log.d(Config.TAG, "Access Token: " + accessToken);
                 PreferencesManager.putAccessToken(LoginActivity.this, accessToken);
 
-                AuthCredentials credentials = new AuthCredentials("ua.nazar@gmail.com", accessToken);
+                AuthCredentials credentials = new AuthCredentials("tesla@example.com", accessToken);
 
                 try {
                     JSONObject carsResult = api.getVehicles(credentials);
@@ -87,8 +87,7 @@ public class LoginActivity extends BaseActivity {
                 showSignOutForm();
             }
         }
-    };
-
+    }
 
     private class TestAsync extends AsyncTask<Object, Object, Object> {
         @Override
@@ -98,7 +97,7 @@ public class LoginActivity extends BaseActivity {
                 TeslaApi api = TeslaApi.getInstance();
                 //Log.d(Config.TAG, "Performing login operation...");
                 String accessToken = PreferencesManager.getAccessToken(LoginActivity.this);
-                AuthCredentials credentials = new AuthCredentials("ua.nazar@gmail.com", accessToken);
+                AuthCredentials credentials = new AuthCredentials("tesla@example.com", accessToken);
 
                 try {
                     JSONObject locationResult = api.getDriveState(PreferencesManager.getCarId(LoginActivity.this), credentials);
@@ -148,7 +147,7 @@ public class LoginActivity extends BaseActivity {
 
                 PreferencesManager.putUserName(LoginActivity.this, userNameValue);
 
-                loginTask.execute();
+                new LoginTask().execute(userNameValue, passwordValue);
             }
         });
         signOutBtn.setOnClickListener(new View.OnClickListener() {

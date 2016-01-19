@@ -24,13 +24,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:circle_border_width="0dp"
-            app:circle_radius="@dimen/button_size"/>
+            app:circle_radius="@dimen/button_size" />
 
         <ImageView
             android:id="@+id/top_image_1"
             android:layout_width="@dimen/button_size"
             android:layout_height="@dimen/button_size"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
 
     </FrameLayout>
 

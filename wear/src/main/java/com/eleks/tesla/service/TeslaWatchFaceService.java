@@ -74,7 +74,7 @@ public class TeslaWatchFaceService extends CanvasWatchFaceService {
     }
 
     public void onEvent(VehicleStateLoadedEvent chargeStateLoadedEvent) {
-        VehicleState vehicleState= chargeStateLoadedEvent.getVehicleState();
+        VehicleState vehicleState = chargeStateLoadedEvent.getVehicleState();
         mEngine.getCarState().updateVehicleState(vehicleState);
         mEngine.invalidate();
     }
@@ -92,7 +92,7 @@ public class TeslaWatchFaceService extends CanvasWatchFaceService {
         public static final int INTERACTIVE_UPDATE_RATE_MS = 1000;
         private static final int CONNECTION_TIME_OUT_MS = 1000;
 
-        public static final int LOAD_CAR_STATE_DELAY_MS = 10*1000;
+        public static final int LOAD_CAR_STATE_DELAY_MS = 10 * 1000;
         private GoogleApiClient mGoogleApiClient;
         private String mNodeId;
 
@@ -280,13 +280,13 @@ public class TeslaWatchFaceService extends CanvasWatchFaceService {
 
             Resources resources = TeslaWatchFaceService.this.getResources();
 
-            Drawable chargingDrawable = resources.getDrawable(R.mipmap.charging);
+            Drawable chargingDrawable = resources.getDrawable(R.drawable.charging);
             mChargingBitmap = ((BitmapDrawable) chargingDrawable).getBitmap();
 
-            Drawable mLockedBitmapDrawable = resources.getDrawable(R.mipmap.locked_small);
+            Drawable mLockedBitmapDrawable = resources.getDrawable(R.drawable.locked_small);
             mLockedBitmap = ((BitmapDrawable) mLockedBitmapDrawable).getBitmap();
 
-            Drawable unlockedDrawable = resources.getDrawable(R.mipmap.unlocked_small);
+            Drawable unlockedDrawable = resources.getDrawable(R.drawable.unlocked_small);
             mUnLockedBitmap = ((BitmapDrawable) unlockedDrawable).getBitmap();
 
             configureStyle();
@@ -465,22 +465,22 @@ public class TeslaWatchFaceService extends CanvasWatchFaceService {
                     || mUnLockedScaledBitmap.getWidth() != iconSideSize
                     || mUnLockedScaledBitmap.getHeight() != iconSideSize) {
                 mUnLockedScaledBitmap = Bitmap.createScaledBitmap(mUnLockedBitmap,
-                        iconSideSize, iconSideSize, true );
+                        iconSideSize, iconSideSize, true);
             }
 
             if (mChargingScaledBitmap == null
                     || mChargingScaledBitmap.getWidth() != iconSideSize
                     || mChargingScaledBitmap.getHeight() != iconSideSize) {
                 mChargingScaledBitmap = Bitmap.createScaledBitmap(mChargingBitmap,
-                        iconSideSize, iconSideSize, true );
+                        iconSideSize, iconSideSize, true);
             }
 
             Bitmap lockStateBitmap = mCarState.isLocked() ? mLockedScaledBitmap : mUnLockedScaledBitmap;
-            if(mCarState.isIsCharging()){
-                canvas.drawBitmap(lockStateBitmap, width / 2 , height / 4, null);
-                canvas.drawBitmap(mChargingScaledBitmap, (width / 2 )- iconSideSize , height / 4, null);
-            }else {
-                canvas.drawBitmap(lockStateBitmap, (width - iconSideSize)/ 2 , height / 4, null);
+            if (mCarState.isIsCharging()) {
+                canvas.drawBitmap(lockStateBitmap, width / 2, height / 4, null);
+                canvas.drawBitmap(mChargingScaledBitmap, (width / 2) - iconSideSize, height / 4, null);
+            } else {
+                canvas.drawBitmap(lockStateBitmap, (width - iconSideSize) / 2, height / 4, null);
             }
 
         }

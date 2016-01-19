@@ -25,11 +25,13 @@
             app:circle_border_width="0dp"
             app:circle_color="@color/button_color"
             app:circle_radius="52dp" />
+
         <ImageView
             android:id="@+id/action_image_1"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
         <ImageView
             android:id="@+id/action_image_2"
             android:layout_gravity="center"

@@ -64,19 +64,19 @@ public class MainActivity extends CommunicationActivity implements View.OnClickL
     protected void setUpUI() {
         mCircles[0].setCircleColor(getResources().getColor(R.color.category_charge));
         mRipples[0].setImageResource(R.drawable.fake_ripple_charge);
-        mImages[0].setImageResource(R.mipmap.category_charge);
+        mImages[0].setImageResource(R.drawable.category_charge);
 
         mCircles[1].setCircleColor(getResources().getColor(R.color.category_location));
         mRipples[1].setImageResource(R.drawable.fake_ripple_location);
-        mImages[1].setImageResource(R.mipmap.category_location);
+        mImages[1].setImageResource(R.drawable.category_location);
 
         mCircles[2].setCircleColor(getResources().getColor(R.color.category_condition));
         mRipples[2].setImageResource(R.drawable.fake_ripple_condition);
-        mImages[2].setImageResource(R.mipmap.category_condition);
+        mImages[2].setImageResource(R.drawable.category_condition);
 
         mCircles[3].setCircleColor(getResources().getColor(R.color.category_drive));
         mRipples[3].setImageResource(R.drawable.fake_ripple_drive);
-        mImages[3].setImageResource(R.mipmap.category_drive);
+        mImages[3].setImageResource(R.drawable.category_drive);
     }
 
     protected void initFields() {
@@ -330,7 +330,7 @@ public class MainActivity extends CommunicationActivity implements View.OnClickL
         }
     }
 
-    private void hideViews(){
+    private void hideViews() {
         if (mButtons[3] != null) {
             mImages[3].setAlpha(0f);
             mCircles[3].setAlpha(0f);

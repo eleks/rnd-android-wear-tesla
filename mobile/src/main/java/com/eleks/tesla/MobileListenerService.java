@@ -93,7 +93,7 @@ public class MobileListenerService extends WearableListenerService {
     public void onMessageReceived(MessageEvent messageEvent) {
         String accessToken = PreferencesManager.getAccessToken(this);
         carId = PreferencesManager.getCarId(this);
-        credentials = new AuthCredentials("ua.nazar@gmail.com", accessToken);
+        credentials = new AuthCredentials("tesla@example.com", accessToken);
         mNodeId = messageEvent.getSourceNodeId();
 
         String message = messageEvent.getPath();

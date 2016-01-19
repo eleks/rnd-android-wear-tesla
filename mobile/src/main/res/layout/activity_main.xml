@@ -52,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:hint="PASSWORD"
                 android:inputType="textPassword" />
+
             <Button
                 android:id="@+id/signIn"
                 android:layout_width="match_parent"

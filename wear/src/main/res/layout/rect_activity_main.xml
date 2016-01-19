@@ -20,6 +20,7 @@
             android:layout_centerHorizontal="true"
             android:alpha="0.1"
             android:visibility="invisible" />
+
         <FrameLayout
             android:id="@+id/segment_top"
             android:layout_width="wrap_content"
@@ -33,13 +34,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 app:circle_border_width="0dp"
-                app:circle_radius="@dimen/button_size"/>
+                app:circle_radius="@dimen/button_size" />
 
             <ImageView
                 android:id="@+id/top_image_1"
                 android:layout_width="@dimen/button_size"
                 android:layout_height="@dimen/button_size"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
 
         </FrameLayout>
 
@@ -50,7 +51,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:alpha="0.1"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
+
         <FrameLayout
             android:id="@+id/segment_left"
             android:layout_width="wrap_content"
@@ -65,13 +67,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 app:circle_border_width="0dp"
-                app:circle_radius="@dimen/button_size"/>
+                app:circle_radius="@dimen/button_size" />
 
             <ImageView
                 android:id="@+id/left_image_1"
                 android:layout_width="@dimen/button_size"
                 android:layout_height="@dimen/button_size"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
 
         </FrameLayout>
 
@@ -80,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
 
         <ImageView
             android:id="@+id/ripple_right"
@@ -89,7 +91,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:alpha="0.1"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
+
         <FrameLayout
             android:id="@+id/segment_right"
             android:layout_width="wrap_content"
@@ -104,13 +107,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 app:circle_border_width="0dp"
-                app:circle_radius="@dimen/button_size"/>
+                app:circle_radius="@dimen/button_size" />
 
             <ImageView
                 android:id="@+id/right_image_1"
                 android:layout_width="@dimen/button_size"
                 android:layout_height="@dimen/button_size"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
 
         </FrameLayout>
 
@@ -122,6 +125,7 @@
             android:layout_centerHorizontal="true"
             android:alpha="0.1"
             android:visibility="invisible" />
+
         <FrameLayout
             android:id="@+id/segment_bottom"
             android:layout_width="wrap_content"
@@ -136,13 +140,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 app:circle_border_width="0dp"
-                app:circle_radius="@dimen/button_size"/>
+                app:circle_radius="@dimen/button_size" />
 
             <ImageView
                 android:id="@+id/bottom_image_1"
                 android:layout_width="@dimen/button_size"
                 android:layout_height="@dimen/button_size"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
 
         </FrameLayout>
     </RelativeLayout>

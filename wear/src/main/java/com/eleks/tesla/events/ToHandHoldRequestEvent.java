@@ -9,11 +9,11 @@ public class ToHandHoldRequestEvent {
     private String mPath;
     private Serializable mCommand;
 
-    public ToHandHoldRequestEvent(String path){
+    public ToHandHoldRequestEvent(String path) {
         mPath = path;
     }
 
-    public ToHandHoldRequestEvent(String path, Serializable command){
+    public ToHandHoldRequestEvent(String path, Serializable command) {
         mPath = path;
         mCommand = command;
     }
